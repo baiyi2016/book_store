@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zeng.dao.mapper.UserMapper">
+
+    <sql id="userBaseColumnSql">
+        user_id,
+        username,
+        password,
+        email
+    </sql>
+
+    <sql id="userBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userId)">
+                    user_id = #{map.userId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.username)">
+                    AND username = #{map.username}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.password)">
+                    AND password = #{map.password}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.email)">
+                    AND email = #{map.email}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertUser" parameterType="com.zeng.dao.entity.User">
+        INSERT INTO user(
+        <include refid="userBaseColumnSql"/>
+        )VALUES(
+            #{userId},
+            #{username},
+            #{password},
+            #{email}
+        )
+    </insert>
+
+    
+    <delete id="deleteUserByUserId" parameterType="Integer">
+        DELETE FROM user WHERE user_id = #{userId}
+    </delete>
+
+    <update id="updateUser" parameterType="com.zeng.dao.entity.User">
+        UPDATE user
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(username)">
+                username = #{username} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(password)">
+                password = #{password} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">
+                email = #{email} ,
+            </if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="searchUserByParams" parameterType="map" resultMap="userMap">
+        SELECT
+        <include refid="userBaseColumnSql"/>
+        FROM user
+        <include refid="userBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.zeng.dao.entity.User" id="userMap">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zeng.dao.mapper.OrderDetailMapper">
+
+    <sql id="orderDetailBaseColumnSql">
+        id,
+        order_id,
+        book_id,
+        number,
+        trade_price
+    </sql>
+
+    <sql id="orderDetailBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.id)">
+                    id = #{map.id}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.orderId)">
+                    AND order_id = #{map.orderId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.bookId)">
+                    AND book_id = #{map.bookId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.number)">
+                    AND number = #{map.number}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.tradePrice)">
+                    AND trade_price = #{map.tradePrice}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertOrderDetail" parameterType="com.zeng.dao.entity.OrderDetail">
+        INSERT INTO order_detail(
+        <include refid="orderDetailBaseColumnSql"/>
+        )VALUES(
+            #{id},
+            #{orderId},
+            #{bookId},
+            #{number},
+            #{tradePrice}
+        )
+    </insert>
+
+    
+    <delete id="deleteOrderDetailById" parameterType="Integer">
+        DELETE FROM order_detail WHERE id = #{id}
+    </delete>
+
+    <update id="updateOrderDetail" parameterType="com.zeng.dao.entity.OrderDetail">
+        UPDATE order_detail
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(orderId)">
+                order_id = #{orderId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(bookId)">
+                book_id = #{bookId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(number)">
+                number = #{number} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(tradePrice)">
+                trade_price = #{tradePrice} ,
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="searchOrderDetailByParams" parameterType="map" resultMap="orderDetailMap">
+        SELECT
+        <include refid="orderDetailBaseColumnSql"/>
+        FROM order_detail
+        <include refid="orderDetailBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.zeng.dao.entity.OrderDetail" id="orderDetailMap">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="book_id" property="bookId"/>
+        <result column="number" property="number"/>
+        <result column="trade_price" property="tradePrice"/>
+    </resultMap>
+
+</mapper>

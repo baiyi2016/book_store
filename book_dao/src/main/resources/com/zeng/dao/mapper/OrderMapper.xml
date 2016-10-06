@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zeng.dao.mapper.OrderMapper">
+
+    <sql id="orderBaseColumnSql">
+        order_id,
+        user_id,
+        create_time,
+        order_price,
+        order_status
+    </sql>
+
+    <sql id="orderBaseWhereSql">
+        <if test="map!=null">
+            <where>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.orderId)">
+                    order_id = #{map.orderId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.userId)">
+                    AND user_id = #{map.userId}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.createTime)">
+                    AND create_time = #{map.createTime}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.orderPrice)">
+                    AND order_price = #{map.orderPrice}
+                </if>
+                <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(map.orderStatus)">
+                    AND order_status = #{map.orderStatus}
+                </if>
+            </where>
+        </if>
+    </sql>
+
+    <insert id="insertOrder" parameterType="com.zeng.dao.entity.Order">
+        INSERT INTO order(
+        <include refid="orderBaseColumnSql"/>
+        )VALUES(
+            #{orderId},
+            #{userId},
+            #{createTime},
+            #{orderPrice},
+            #{orderStatus}
+        )
+    </insert>
+
+    
+    <delete id="deleteOrderByOrderId" parameterType="Integer">
+        DELETE FROM order WHERE order_id = #{orderId}
+    </delete>
+
+    <update id="updateOrder" parameterType="com.zeng.dao.entity.Order">
+        UPDATE order
+        <set>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userId)">
+                user_id = #{userId} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(createTime)">
+                create_time = #{createTime} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(orderPrice)">
+                order_price = #{orderPrice} ,
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(orderStatus)">
+                order_status = #{orderStatus} ,
+            </if>
+        </set>
+        WHERE order_id = #{orderId}
+    </update>
+
+    <select id="searchOrderByParams" parameterType="map" resultMap="orderMap">
+        SELECT
+        <include refid="orderBaseColumnSql"/>
+        FROM order
+        <include refid="orderBaseWhereSql"/>
+    </select>
+
+    <resultMap type="com.zeng.dao.entity.Order" id="orderMap">
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="order_status" property="orderStatus"/>
+    </resultMap>
+
+</mapper>
