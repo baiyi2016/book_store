@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class StartWebApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
+
         SpringApplication.run(StartWebApp.class, args);//启动Spring Boot框架
     }
 }
