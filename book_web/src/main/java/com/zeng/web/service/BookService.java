@@ -5,5 +5,5 @@ package com.zeng.web.service;
  */
 public interface BookService {
 
-    public void findAll();
+    public Page<Book> findAll();
 }
