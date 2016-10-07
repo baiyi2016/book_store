@@ -36,9 +36,10 @@
 					<th class="store">库存</th>
 					<th class="view">图片预览</th>
 				</tr>
+
 				<c:forEach var="book" items="${requestScope.bookList}" varStatus="vs">
-					<%--<c:choose>--%>
-						<%--<c:when test="true">--%>
+					<c:choose>
+						<c:when test="${vs.count%2==1}">
 							<tr>
 								<td><input type="checkbox" name="bookId" value="${book.bookId}" /></td>
 								<td class="title">${book.bookName}</td>
@@ -46,39 +47,24 @@
 								<td>${book.bookStorage}</td>
 								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>
 							</tr>
-						<%--</c:when>--%>
-						<%--<c:when test="${vs.count%2==1}">--%>
-							<%--<tr class="odd">--%>
-								<%--<td><input type="checkbox" name="bookId" value="${book.bookId}" /></td>--%>
-								<%--<td class="title">${book.bookName}</td>--%>
-								<%--<td>￥${book.bookPrice}</td>--%>
-								<%--<td>${book.bookStorage}</td>--%>
-								<%--<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>--%>
-							<%--</tr>--%>
-						<%--</c:when>--%>
+						</c:when>
+						<c:when test="${vs.count%2==0}">
+							<tr class="odd">
+								<td><input type="checkbox" name="bookId" value="${book.bookId}" /></td>
+								<td class="title">${book.bookName}</td>
+								<td>￥${book.bookPrice}</td>
+								<td>${book.bookStorage}</td>
+								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>
+							</tr>
+						</c:when>
 
-					<%--</c:choose>--%>
+					</c:choose>
 
 				</c:forEach>
 
-
-				<%--<tr>--%>
-					<%--<td><input type="checkbox" name="bookId" value="9" /></td>--%>
-					<%--<td class="title">生生世世未了缘</td>--%>
-					<%--<td>￥17.50</td>--%>
-					<%--<td>999</td>--%>
-					<%--<td class="thumb"><img src="images/book/book_09.gif" /></td>--%>
-				<%--</tr>--%>
-				<%--<tr class="odd">--%>
-					<%--<td><input type="checkbox" name="bookId" value="10" /></td>--%>
-					<%--<td class="title">一生有多少爱</td>--%>
-					<%--<td>￥17.50</td>--%>
-					<%--<td>999</td>--%>
-					<%--<td class="thumb"><img src="images/book/book_10.gif" /></td>--%>
-				<%--</tr>--%>
-				<%--<tr>--%>
-					<%--<td colspan="5" class="page-spliter"><a href="toaddBook">增加图书</a></td>--%>
-				<%--</tr>--%>
+				<tr>
+					<td colspan="5" class="page-spliter"><a href="toaddBook">增加图书</a></td>
+				</tr>
 			</table>
 			<div class="page-spliter">
 				<a href="#">&lt;</a>
