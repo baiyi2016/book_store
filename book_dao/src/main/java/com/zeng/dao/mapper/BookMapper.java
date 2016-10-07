@@ -10,11 +10,11 @@ import com.fc.platform.commons.page.Pageable;
 
 public interface BookMapper {
 
-	void insertBook(Book book);
+	int insertBook(Book book);
 
-	void deleteBookByBookId(Integer bookId);
+	int deleteBookByBookId(Integer bookId);
 
-	void updateBook(Book book);
+	int updateBook(Book book);
 
 	Page<Book> searchBookByParams(@Param("map")Map<String, String> map , Pageable pageable);
 
