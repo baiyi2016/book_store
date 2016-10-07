@@ -23,7 +23,9 @@ public class BookController {
     @RequestMapping("index")
     public String index(@RequestParam(name="currentPage",defaultValue = "0")Integer currentPage,ModelMap modelMap) {
         Page<Book> pageBook = bookService.findBookByPage(currentPage,10);
+        System.out.println(pageBook);
         List<Book> listBook = pageBook.getContent();
+        System.out.println(listBook);
         modelMap.put("bookList",listBook);
         return "index";
     }
