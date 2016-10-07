@@ -6,9 +6,7 @@ import com.zeng.web.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/10/6.
@@ -19,8 +17,9 @@ public class UserServiceImpl implements UserServices{
     private UserMapper userMapper;
 
     @Override
-    public String addUser(User user) {
-        return null;
+    public boolean addUser(User user) {
+        userMapper.insertUser(user);
+        return true;
     }
 
     @Override
