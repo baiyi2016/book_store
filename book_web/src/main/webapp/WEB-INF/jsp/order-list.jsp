@@ -42,7 +42,7 @@
 					<tr>
 						<td>${order.orderId}</td>
 						<td class="thumb"><img src="images/book/book_01.gif" /></td>
-						<td>${order.userId}</td>
+						<td>${sessionScope.user.username}</td>
 						<td>${order.orderPrice}</td>
 						<td><ftm:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"></ftm:formatDate></td>
 						<td>${order.orderStatus}</td>
