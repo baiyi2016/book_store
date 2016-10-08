@@ -34,12 +34,12 @@
     </sql>
 
     <insert id="insertOrder" parameterType="com.zeng.dao.entity.Order">
-        INSERT INTO order(
+        INSERT INTO `order`(
         <include refid="orderBaseColumnSql"/>
         )VALUES(
             #{orderId},
             #{userId},
-            #{createTime},
+            SYSDATE(),
             #{orderPrice},
             #{orderStatus}
         )
@@ -47,11 +47,11 @@
 
     
     <delete id="deleteOrderByOrderId" parameterType="Integer">
-        DELETE FROM order WHERE order_id = #{orderId}
+        DELETE FROM `order` WHERE order_id = #{orderId}
     </delete>
 
     <update id="updateOrder" parameterType="com.zeng.dao.entity.Order">
-        UPDATE order
+        UPDATE `order`
         <set>
             <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userId)">
                 user_id = #{userId} ,
@@ -72,7 +72,7 @@
     <select id="searchOrderByParams" parameterType="map" resultMap="orderMap">
         SELECT
         <include refid="orderBaseColumnSql"/>
-        FROM order
+        FROM `order`
         <include refid="orderBaseWhereSql"/>
     </select>
 

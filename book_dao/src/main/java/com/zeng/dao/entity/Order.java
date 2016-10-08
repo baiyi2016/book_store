@@ -1,5 +1,7 @@
 package com.zeng.dao.entity;
 
+import java.util.List;
+
 /**
  * 
  * @author zeng
@@ -8,7 +10,7 @@ public class Order {
 	/**
 	 *  订单主键ID
 	 */
-	private Integer orderId;
+	private String orderId;
 	/**
 	 *  用户的外键
 	 */
@@ -29,7 +31,18 @@ public class Order {
 	 * 订单主键ID
 	 * @param orderId
 	 */
-	public void setOrderId(Integer orderId){
+
+	private List<OrderDetail> orderDetailList;
+
+	public List<OrderDetail> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
+	}
+
+	public void setOrderId(String orderId){
 		this.orderId = orderId;
 	}
 	
@@ -37,7 +50,7 @@ public class Order {
      * 订单主键ID
      * @return
      */	
-    public Integer getOrderId(){
+    public String getOrderId(){
     	return orderId;
     }
 	/**
