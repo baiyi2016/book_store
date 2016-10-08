@@ -109,4 +109,10 @@ public class BookController {
         session.setAttribute("map",map);
         return true;
     }
+
+    @RequestMapping("/loginout")
+    public String loginout(HttpSession session){
+        session.invalidate();
+        return "redirect:/tologin";
+    }
 }
