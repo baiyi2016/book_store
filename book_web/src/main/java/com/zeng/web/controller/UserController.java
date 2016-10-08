@@ -5,8 +5,10 @@ import com.zeng.web.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,6 +25,22 @@ public class UserController {
         return userService.userAll();
     }
 
+    @RequestMapping("/getuser")
+    @ResponseBody
+    public boolean getuser(@RequestParam("username")String username,@RequestParam("password")String password,HttpSession session){
+        User user = userService.find(username, password);
+        if(user!=null) {
+            session.setAttribute("user",user);
+            return true;
+        }
+      return false;
+    }
+
+    @RequestMapping("/toindex")
+    public String toindex(){
+        return "index";
+    }
+
     @RequestMapping("/adduser")
     @ResponseBody
     public boolean adduser(User user){
@@ -31,6 +49,16 @@ public class UserController {
     }
     @RequestMapping("/toadd")
     public String toadd(User user){
+        return "register";
+    }
+
+    @RequestMapping("/tologin")
+    public String tologin(){
         return "login";
+    }
+
+    @RequestMapping("/toregister")
+    public String toregister(){
+        return "redirect:/register_success.html";
     }
 }
