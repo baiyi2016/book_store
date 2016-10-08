@@ -5,7 +5,7 @@ import com.zeng.dao.entity.Book;
 /**
  * Created by Administrator on 2016/10/7.
  */
-public class BookVo extends Book {
+public class BookVo{
 
     private Integer shopingCount;
 

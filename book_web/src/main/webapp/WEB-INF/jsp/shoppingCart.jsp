@@ -36,6 +36,7 @@
 					<th class="nums">数量</th>
 					<th class="price">价格</th>
 					<th class="price">小计</th>
+					<th class="price">操作</th>
 				</tr>
 
 				<c:forEach items="${sessionScope.map}" var="map" varStatus="vs">
@@ -45,6 +46,7 @@
 						<td><input class="input-text" id="shoping_count${vs.count}" type="number" name="shopingCount" value="${map.value.shopingCount}"/></td>
 						<td>￥<span id="book_price${vs.count}">${map.value.book.bookPrice}</span></td>
 						<td>￥<span id="one_total_count${vs.count}">${map.value.book.bookPrice}</span></td>
+						<td><a href="${pageContext.request.contextPath}/deleteShopingCart?bookId=${map.value.book.bookId}">删除</a></td>
 					</tr>
 				</c:forEach>
 
@@ -64,7 +66,7 @@
 
 			</table>
 			<div class="button">
-				<h4>总价：￥<span id="total_price">65.00</span>元</h4>
+				<h4>总价：￥<span id="total_price">0</span>元</h4>
 				<input class="input-chart" type="submit" name="submit" value="" />
 			</div>
 		</form>
@@ -78,12 +80,14 @@
 
 <script type="text/javascript">
 	$(function(){
-//		function changeCount(vs) {
-//			console.info($("#shoping_count"+vs).val());
-//			console.info($("#book_price"+vs).text());
-//			$("#one_total_count"+vs).html(shopingCount);
-//		}
+
+		priceCount();
+
 		$(".input-text").change(function(){
+			priceCount();
+		});
+
+		function priceCount(){
 			var totalPrice=0;
 			for(var i=1;i<10;i++) {
 				var shopingCount = $("#shoping_count"+i).val()*$("#book_price"+i).text();
@@ -95,8 +99,11 @@
 				$("#one_total_count"+i).html(shopingCount);
 			}
 			$("#total_price").html(totalPrice);
-		})
+		}
 	})
+
+
+
 </script>
 
 
