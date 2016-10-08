@@ -18,7 +18,7 @@
 		<div class="userMenu">
 			<ul>
 				<li class="current"><a href="${pageContext.request.contextPath}/index">User首页</a></li>
-				<li><a href="orderlist.html">我的订单</a></li>
+				<li><a href="order-list.jsp">我的订单</a></li>
 				<li><a href="${pageContext.request.contextPath}/toshopingCart">购物车</a></li>
 				<li><a href="${pageContext.request.contextPath}/loginout">注销</a></li>
 			</ul>

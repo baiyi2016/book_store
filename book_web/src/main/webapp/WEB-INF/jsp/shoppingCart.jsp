@@ -16,7 +16,7 @@
 		<div class="userMenu">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/index">User首页</a></li>
-				<li><a href="orderlist.html">我的订单</a></li>
+				<li><a href="${pageContext.request.contextPath}/orderList">我的订单</a></li>
 				<li class="current"><a href="${pageContext.request.contextPath}/toshopingCart">购物车</a></li>
 				<li><a href="${pageContext.request.contextPath}/loginout">注销</a></li>
 			</ul>
@@ -28,7 +28,7 @@
 </div>
 <div id="content" class="wrap">
 	<div class="list bookList">
-		<form method="post" name="shoping" action="shopping-success.html">
+		<form method="post" name="shoping" action="${pageContext.request.contextPath}/addOrder">
 			<table>
 				<tr class="title">
 					<th class="view">图片预览</th>
@@ -43,7 +43,7 @@
 					<tr>
 						<td class="thumb"><img src="images/book/book_01.gif" /></td>
 						<td class="title">${map.value.book.bookName}</td>
-						<td><input class="input-text" id="shoping_count${vs.count}" type="number" name="shopingCount" value="${map.value.shopingCount}"/></td>
+						<td><input  class="input-text" id="shoping_count${vs.count}" bookId="${map.value.book.bookId}" type="number" name="shopingCount" value="${map.value.shopingCount}"/></td>
 						<td>￥<span id="book_price${vs.count}">${map.value.book.bookPrice}</span></td>
 						<td>￥<span id="one_total_count${vs.count}">${map.value.book.bookPrice}</span></td>
 						<td><a href="${pageContext.request.contextPath}/deleteShopingCart?bookId=${map.value.book.bookId}">删除</a></td>
@@ -84,7 +84,17 @@
 		priceCount();
 
 		$(".input-text").change(function(){
+			var bookId = $(this).attr("bookId");
+			var shopingCount = $(this).val();
 			priceCount();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/updateCart",
+				type:"POST",
+				data:{"bookId":bookId,"shopingCount":shopingCount},
+				success:function(backData) {
+
+				}
+			})
 		});
 
 		function priceCount(){
