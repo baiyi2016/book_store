@@ -91,11 +91,22 @@ public class BookController {
     }
 
     @RequestMapping("/deleteShopingCart")
-    @Transactional
     public String deleteShopingCart(String bookId,HttpSession session) {
         Map<String,BookVo> map = (Map<String,BookVo>)session.getAttribute("map");
         map.remove(bookId);
         session.setAttribute("map",map);
         return "shoppingCart";
+    }
+
+    @RequestMapping("/updateCart")
+    @ResponseBody
+    public boolean updateCart(String bookId,String shopingCount,HttpSession session){
+        Map<String,BookVo> map = (Map<String,BookVo>)session.getAttribute("map");
+        BookVo bookVo = map.get(bookId);
+        if(bookVo!=null) {
+            bookVo.setShopingCount(Integer.parseInt(shopingCount));
+        }
+        session.setAttribute("map",map);
+        return true;
     }
 }
