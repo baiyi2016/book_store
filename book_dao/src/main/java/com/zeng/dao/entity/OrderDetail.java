@@ -12,7 +12,7 @@ public class OrderDetail {
 	/**
 	 *  订单外键
 	 */
-	private Integer orderId;
+	private String orderId;
 	/**
 	 *  图书外键
 	 */
@@ -29,6 +29,16 @@ public class OrderDetail {
 	 * 订单详情表主键ID
 	 * @param id
 	 */
+	private Order order;
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
 	public void setId(Integer id){
 		this.id = id;
 	}
@@ -44,7 +54,7 @@ public class OrderDetail {
 	 * 订单外键
 	 * @param orderId
 	 */
-	public void setOrderId(Integer orderId){
+	public void setOrderId(String orderId){
 		this.orderId = orderId;
 	}
 	
@@ -52,7 +62,7 @@ public class OrderDetail {
      * 订单外键
      * @return
      */	
-    public Integer getOrderId(){
+    public String getOrderId(){
     	return orderId;
     }
 	/**
