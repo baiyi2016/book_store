@@ -6,6 +6,7 @@ package com.zeng.web.controller;
 import com.zeng.web.vo.BookVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zeng.web.service.BookService;
@@ -71,8 +72,8 @@ public class BookController {
                     Book bookNew = list.get(0);
                     bookVo.setBook(bookNew);
                 }
-                if(map.get(bookVo.getBookId())!=null) {
-                    bookVo.setShopingCount(bookVo.getShopingCount()+1);
+                if(map.get(bookVo.getBook().getBookId()+"")!=null) {
+                    bookVo.setShopingCount(map.get(bookVo.getBook().getBookId()+"").getShopingCount()+1);
                 }else {
                     bookVo.setShopingCount(1);
                 }
@@ -85,8 +86,16 @@ public class BookController {
 
     @RequestMapping("/toshopingCart")
     public String toshopingCart() {
+
         return "shoppingCart";
     }
 
-
+    @RequestMapping("/deleteShopingCart")
+    @Transactional
+    public String deleteShopingCart(String bookId,HttpSession session) {
+        Map<String,BookVo> map = (Map<String,BookVo>)session.getAttribute("map");
+        map.remove(bookId);
+        session.setAttribute("map",map);
+        return "shoppingCart";
+    }
 }
