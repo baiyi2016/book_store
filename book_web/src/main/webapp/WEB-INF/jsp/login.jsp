@@ -56,7 +56,7 @@ $(document).ready(function(){
   $(".input-btn").click(function(){
     $.post("getuser",$("#userform").serialize(),function(backData){
       if(backData==true) {
-         location.href("${pageContext.request.contextPath}/index")
+         location.href="${pageContext.request.contextPath}/index";
       }
     })
 //    if($(".ptext").val()!=p) {
