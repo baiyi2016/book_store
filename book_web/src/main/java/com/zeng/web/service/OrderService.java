@@ -1,5 +1,6 @@
 package com.zeng.web.service;
 
+import com.fc.platform.commons.page.Page;
 import com.zeng.dao.entity.Order;
 import com.zeng.dao.entity.OrderDetail;
 
@@ -17,6 +18,6 @@ public interface OrderService {
 
     public boolean addOrder(Order order);
 
-
+    public Page<Order> findOrderPageByOrder(Order order,Integer page, Integer rowCount );
 
 }

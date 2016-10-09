@@ -38,14 +38,20 @@
 					<th class="status">订单状态</th>
 				</tr>
 
-				<c:forEach var="order" items="${requestScope.orderList}">
+				<c:forEach var="orderVo" items="${requestScope.orderVoList}">
 					<tr>
-						<td>${order.orderId}</td>
-						<td class="thumb"><img src="images/book/book_01.gif" /></td>
+						<td>${orderVo.order.orderId}</td>
+
+						<td class="thumb">
+							<c:forEach items="${orderVo.bookImgUrlList}" var="bookImgUrl">
+								<img src="${pageContext.request.contextPath}/images/book/${bookImgUrl}" width="50px" height="80px" />
+							</c:forEach>
+						</td>
+
 						<td>${sessionScope.user.username}</td>
-						<td>${order.orderPrice}</td>
-						<td><ftm:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"></ftm:formatDate></td>
-						<td>${order.orderStatus}</td>
+						<td>￥${orderVo.order.orderPrice}</td>
+						<td><ftm:formatDate value="${orderVo.order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"></ftm:formatDate></td>
+						<td>${orderVo.order.orderStatus}</td>
 					</tr>
 				</c:forEach>
 
@@ -69,15 +75,19 @@
 
 			</table>
 			<div class="page-spliter">
-				<a href="#">&lt;</a>
-				<a href="#">首页</a>
-				<span class="current">1</span>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
+				<a href="${pageContext.request.contextPath}/orderList?currentPage=${currentPage-1}">&lt;</a>
+				<a href="${pageContext.request.contextPath}/orderList?currentPage=0">首页</a>
+				<c:forEach begin="0" end="${requestScope.totalPages-1}" var="currentPage">
+					<a href="${pageContext.request.contextPath}/orderList?currentPage=${currentPage}">${currentPage+1}</a>
+				</c:forEach>
+				<%--<span class="current">1</span>--%>
+				<%--<a href="#">2</a>--%>
+				<%--<a href="#">3</a>--%>
+				<%--<a href="#">4</a>--%>
 				<span>...</span>
-				<a href="#">尾页</a>
-				<a href="#">&gt;</a>
+
+				<a href="${pageContext.request.contextPath}/orderList?currentPage=${requestScope.totalPages-1}">尾页</a>
+				<a href="${pageContext.request.contextPath}/orderList?currentPage=${currentPage+1}">&gt;</a>
 			</div>
 			<div class="button"><input class="input-gray" type="submit" name="submit" value="查看一个月前的订单" /><input class="input-gray" type="submit" name="submit" value="查看一个月前的订单" /></div>
 	</div>

@@ -41,7 +41,7 @@
 
 				<c:forEach items="${sessionScope.map}" var="map" varStatus="vs">
 					<tr>
-						<td class="thumb"><img src="images/book/book_01.gif" /></td>
+						<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/${map.value.book.bookImgUrl}" width="100px" height="150px"/></td>
 						<td class="title">${map.value.book.bookName}</td>
 						<td><input  class="input-text" id="shoping_count${vs.count}" bookId="${map.value.book.bookId}" type="number" name="shopingCount" value="${map.value.shopingCount}"/></td>
 						<td>￥<span id="book_price${vs.count}">${map.value.book.bookPrice}</span></td>

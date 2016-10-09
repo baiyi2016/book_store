@@ -17,4 +17,6 @@ public interface OrderDetailService {
 
     public boolean addOrderDetail(OrderDetail orderDetail);
 
+    public List<OrderDetail> findOrderDetailByOrderDetail(OrderDetail orderDetail);
+
 }
