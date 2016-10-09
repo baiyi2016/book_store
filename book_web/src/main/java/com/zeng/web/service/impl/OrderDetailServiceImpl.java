@@ -8,6 +8,10 @@ import com.zeng.web.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2016/10/8.
  */
@@ -32,5 +36,21 @@ public class OrderDetailServiceImpl implements OrderDetailService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<OrderDetail> findOrderDetailByOrderDetail(OrderDetail orderDetail) {
+        Map<String,String> map = new HashMap<String,String>();
+        if(orderDetail!=null) {
+            String orderId = orderDetail.getOrderId();
+            Integer bookId = orderDetail.getBookId();
+            if(orderId!=null) {
+                map.put("orderId",orderId);
+            }
+            if(bookId!=null) {
+                map.put("bookId",bookId+"");
+            }
+        }
+        return orderDetailMapper.searchOrderDetailByParams(map);
     }
 }

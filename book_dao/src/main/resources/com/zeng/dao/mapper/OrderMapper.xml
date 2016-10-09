@@ -74,6 +74,7 @@
         <include refid="orderBaseColumnSql"/>
         FROM `order`
         <include refid="orderBaseWhereSql"/>
+        order by create_time desc
     </select>
 
     <resultMap type="com.zeng.dao.entity.Order" id="orderMap">

@@ -48,7 +48,8 @@
 								<td class="title">${book.bookName}</td>
 								<td>￥${book.bookPrice}</td>
 								<td>${book.bookStorage}</td>
-								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>
+								<%--<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>--%>
+								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/${book.bookImgUrl}" width="100px" height="150px"/></td>
 							</tr>
 						</c:when>
 						<c:when test="${vs.count%2==0}">
@@ -57,7 +58,7 @@
 								<td class="title">${book.bookName}</td>
 								<td>￥${book.bookPrice}</td>
 								<td>${book.bookStorage}</td>
-								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/book_01.gif" /></td>
+								<td class="thumb"><img src="${pageContext.request.contextPath}/images/book/${book.bookImgUrl}" width="100px" height="150px"/></td>
 							</tr>
 						</c:when>
 
