@@ -31,7 +31,7 @@ a:hover, a:active { color:#03F; text-decoration:underline; }
 #login dl dt { float:left; clear:left; width:60px; text-align:right; }
 #login dl dd { margin-left:60px; }
 #login dl dd input { margin:10px; vertical-align:middle; }
-#login dl dd input.input-text { border:1px solid #999999; font-size:14px; height:18px; width:150px; padding:4px 4px; }
+#login dl dd input.input-text { border:1px solid #999999; font-size:14px; height:20px; width:150px; padding:4px 4px; }
 #login dl dd.button input { height:26px; border:none; cursor:pointer; }
 #login dl dd input.input-btn { background:url(../images/button_login.gif); width:77px; }
 #login dl dd input.input-reg { background:url(../images/button_register.gif); width:143px; }
