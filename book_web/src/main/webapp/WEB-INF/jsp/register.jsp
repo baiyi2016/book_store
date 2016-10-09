@@ -38,18 +38,18 @@
       <li class="unpass">2.注册成功</li>
     </ul>
   </div>
-  <form method="post">
+  <form method="post" action="">
     <dl>
       <dt>用 户 名：</dt>
-      <dd><input class="input-text" type="text" name="userName"  id="username" placeholder="用户名"/><span>当前用户已存在！</span></dd>
+      <dd><input class="input-text inputname" type="text" name="username"  id="username" placeholder="用户名"/><span id="namenull"></span></dd>
       <dt>密　　码：</dt>
-      <dd><input class="input-text" type="password" name="passWord" id="password" /><span>密码过于简单！</span></dd>
+      <dd><input class="input-text" type="password" name="password" id="password" /><span id="passnull"></span></dd>
       <dt>确认密码：</dt>
-      <dd><input class="input-text" type="password" name="rePassWord"  id="pwdd"/><span>两次密码输入不一致！</span></dd>
+      <dd><input class="input-text" type="password" name="rePassWord"  id="pwdd"/><span id="rpwd"></span></dd>
       <dt>Email地址：</dt>
-      <dd><input class="input-text" type="text" name="email"  id="email"/><span>邮箱输入不正确！</span></dd>
+      <dd><input class="input-text" type="text" name="email"  id="email"/><span id="emailnull"></span></dd>
       <dt></dt>
-      <dd class="button"><input class="input-reg" type="submit" name="register" value="" /></dd>
+      <dd class="button"><input class="input-reg" type="button" name="register" value="" /></dd>
     </dl>
   </form>
 </div>
@@ -61,17 +61,16 @@
   $(document).ready(function(){
     $(".input-reg").click(function(){
       if($("#username").val()==""){
-        alert("名字不能为空")
+        $("#namenull").html("用户不能为空")
       }if($("#password").val()==""){
-        alert("密码不能为空")
+        $("#passnull").html("密码不能为空")
       }if($("#password").val()!=$("#pwdd").val()){
-        alert("两次输入的密码不一致")
+        $("#rpwd").html("两次输入的密码不一致")
       }if($("#email").val()==""){
-        alert("邮箱不能为空")
+        $("#emailnull").html("email不能为空")
       }else
       $.post("adduser",{username:$("#username").val(),password:$("#password").val(),email:$("#email").val()},function(){
-        alert("注册成功")
-        $.location.href("toregister");
+        location.href="${pageContext.request.contextPath}/toregister";
       })
     })
   })
