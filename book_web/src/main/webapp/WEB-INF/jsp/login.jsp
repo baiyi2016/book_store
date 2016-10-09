@@ -40,9 +40,9 @@
   <form method="post" action="" id="userform">
     <dl>
       <dt>用户名：</dt>
-      <dd><input class="input-text ptext" type="text" name="username"/><span id="yonghu"></span></dd>
+      <dd><input class="input-text" type="text" name="username"/><span id="yonghu"></span></dd>
       <dt>密　码：</dt>
-      <dd><input class="input-text passtext" type="password" name="password" /><span id="mima"></span></dd>
+      <dd><input class="input-text" type="password" name="password" /><span id="mima"></span></dd>
       <dt></dt>
       <dd class="button"><input class="input-btn" type="button" name="submit" value="" /><input class="input-reg" type="button" name="register" value="" onclick="window.location='toadd';" /></dd>
     </dl>
