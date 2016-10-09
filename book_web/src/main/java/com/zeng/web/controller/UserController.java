@@ -40,14 +40,16 @@ public class UserController {
     //跳转首页
     @RequestMapping("/toindex")
     public String toindex(){
+
         return "index";
     }
 
     //注册 增加功能
     @RequestMapping("/adduser")
     @ResponseBody
-    public boolean adduser(User user){
+    public boolean adduser(User user,HttpSession session){
         boolean b=userService.addUser(user);
+        session.setAttribute("user",user);
         return  b;
     }
     //跳到注册界面
@@ -65,6 +67,7 @@ public class UserController {
     //跳转注册成功页面
     @RequestMapping("/toregister")
     public String toregister(){
+
         return "redirect:/register_success.html";
     }
 }
